@@ -1,46 +1,38 @@
 package dev.newrest;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Column;
+import javax.persistence.Table;
+import java.util.Date;
+import java.time.LocalDateTime;
+
 
 @Entity
-@Data
-@NoArgsConstructor
-@AllArgsConstructor
-@Builder
+@Table(name="Registers")
 public class Register {
-	private @Id @GeneratedValue Long id;
-	private float temperature;
-	private float umidity; 
+	@Id 
+	@GeneratedValue(strategy = GenerationType.AUTO)
+	private  Long id;
 	
-	// TODO - Adicionar Data e hora
-	/* 
-	public Register() {
-		System.out.println("- vazio -");
-	}
+	@Column(name = "temperature")
+	private float temperature;
+	@Column(name = "umidity")
+	private float umidity; 
+	@Column(name = "datetime")
+	private Date datetime; 
+	
+	public Register() {}
 	
 	public Register(float temperature, float umidity) {
-		System.out.println("- dois args -");
 		this.temperature = temperature;
 		this.umidity = umidity;
+		this.datetime = new Date();
 	}
 	
-	public Register(Long id, float temperature, float umidity) {
-		System.out.println("- tres args -");
-		this.id = id;
-		this.temperature = temperature;
-		this.umidity = umidity;
-	}
-	
-    // @GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Id
-    @GeneratedValue()
     public Long getId() {
         return id;
     }
@@ -64,7 +56,19 @@ public class Register {
 	public void setUmidity(float umidity) {
 		this.umidity = umidity;
 	}
-	*/
+	
+	public Date getDatetime() {
+		return datetime;
+	}
+	
+	public void setDatetime(Date datetime) {
+		this.datetime = datetime;
+	}
+	
+	@Override
+	public String toString() {
+		return "Data:  Temperature:"+temperature+"   Umidity:"+umidity;
+	}
 	
 	
 }
